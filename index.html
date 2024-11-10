@@ -1,87 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISRO Website Redesign</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ISRO - Indian Space Research Organisation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ECECEC;
+            background-color: #0A1128;
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(10, 17, 40, 0.8);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease-in;
+        }
+        header.scrolled {
+            background: rgba(10, 17, 40, 1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #00CFFD;
+        }
+        nav a {
+            color: #ECECEC;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #00CFFD;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('img/4k-space-background-4v1sv1hbmbn8wmim.jpg'); /* Add your space background image here */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: #ECECEC;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #00CFFD;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin: 1rem 0 2rem;
+        }
+        .btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(45deg, #00CFFD, #9333E6);
+            color: #FFFFFF;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .section h2 {
+            color: #00CFFD;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .timeline {
+            display: flex;
+            justify-content: center; /* Center-align the timeline */
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 2rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline-card {
+            background: rgba(13, 27, 42, 0.9);
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 300px;
+            color: #ECECEC;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .timeline-card:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #0A1128;
+            color: #CCCCCC;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+    <script>
+        window.addEventListener("scroll", () => {
+            const header = document.querySelector("header");
+            header.classList.toggle("scrolled", window.scrollY > 50);
+        });
+    </script>
 </head>
 <body>
-    <!-- Header with Mega Menu -->
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <img src="img/5390cc763267fcdf77044bb570805350-removebg-preview.png" alt="ISRO Logo">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#missions">Missions</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#news">News</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header>
+        <div class="logo">ISRO</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Missions</a>
+            <a href="#">News</a>
+            <a href="#">Research</a>
+        </nav>
     </header>
 
-    <!-- Hero Section with Parallax Effect -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Exploring Space, Advancing Technology</h1>
-            <p>ISRO's dedication to the advancement of space exploration and scientific innovation.</p>
-            <a href="#learn-more" class="cta-button">Discover More</a>
-        </div>
+    <section class="hero">
+        <h1>Exploring Beyond Horizons</h1>
+        <p>Leading the way in space research, science, and innovation.</p>
+        <a href="#about" class="btn">Discover More</a>
     </section>
 
-    <!-- About ISRO -->
-    <section id="about" class="about-section">
+    <section class="section" id="about">
         <h2>About ISRO</h2>
-        <p>An introduction to ISRO’s history, mission, and vision, showcasing its global impact in space technology.</p>
+        <p>We are dedicated to advancing India’s space capabilities and exploring the unknown for a better future.</p>
     </section>
 
-    <!-- Missions Section with Interactive Elements -->
-    <section id="missions" class="missions-section">
-        <h2>Our Missions</h2>
-        <div class="mission-grid">
-            <!-- Mission cards or tiles go here -->
+    <section class="section" id="timeline">
+        <h2>Mission Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-card">
+                <h3>Chandrayaan-3</h3>
+                <p>India’s next lunar mission.</p>
+            </div>
+            <div class="timeline-card">
+                <h3>Mangalyaan</h3>
+                <p>India's Mars Orbiter Mission.</p>
+            </div>
+            <div class="timeline-card">
+                <h3>Gaganyaan</h3>
+                <p>Preparing for India’s first human spaceflight.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Programs Section -->
-    <section id="programs" class="programs-section">
-        <h2>Programs & Research</h2>
-        <p>Overview of ISRO's programs and research initiatives, with quick-access links to specific projects.</p>
-    </section>
-
-    <!-- News and Updates Section -->
-    <section id="news" class="news-section">
-        <h2>Latest News</h2>
-        <div class="news-feed">
-            <!-- News articles in a carousel or card format -->
-        </div>
-    </section>
-
-    <!-- Media Gallery Section -->
-    <section id="gallery" class="gallery-section">
-        <h2>Media Gallery</h2>
-        <p>Browse photos, videos, and infographics of ISRO’s missions and achievements.</p>
-        <div class="media-gallery">
-            <!-- Gallery images/videos -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>&copy; ISRO - Indian Space Research Organisation</p>
-            <nav>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-            </nav>
-        </div>
+    <footer>
+        &copy; 2024 Indian Space Research Organisation. All rights reserved.
     </footer>
 </body>
 </html>
