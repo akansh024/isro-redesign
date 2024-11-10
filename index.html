@@ -6,6 +6,44 @@
     <title>ISRO - Indian Space Research Organisation</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* Loading screen styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0A1128;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            color: #ECECEC;
+        }
+        #loading-logo {
+            margin-bottom: 1rem;
+        }
+        #progress-bar-container {
+            width: 80%;
+            background-color: #1E2A3D;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 8px;
+            width: 0;
+            background: linear-gradient(45deg, #00CFFD, #9333E6);
+            transition: width 0.2s;
+        }
+        #loading-percentage {
+            margin-top: 1rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #00CFFD;
+        }
+
+        /* Main content styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -13,6 +51,7 @@
             color: #ECECEC;
             background-color: #0A1128;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         header {
             position: fixed;
@@ -23,6 +62,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 10;
             backdrop-filter: blur(10px);
             transition: background 0.3s ease-in;
         }
@@ -30,9 +70,15 @@
             background: rgba(10, 17, 40, 1);
         }
         .logo {
+            display: flex;
+            align-items: center;
             font-size: 1.5rem;
             font-family: 'Orbitron', sans-serif;
             color: #00CFFD;
+        }
+        .logo img {
+            height: 40px;
+            margin-right: 8px;
         }
         nav a {
             color: #ECECEC;
@@ -50,7 +96,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('img/4k-space-background-4v1sv1hbmbn8wmim.jpg'); /* Add your space background image here */
+            background-image: url('img/4k-space-background-4v1sv1hbmbn8wmim.jpg'); /* Add your space background image */
             background-size: cover;
             background-position: center;
             text-align: center;
@@ -89,25 +135,24 @@
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-        .timeline {
+        .section-content {
             display: flex;
-            justify-content: center; /* Center-align the timeline */
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
-            padding: 2rem 0;
+            gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-        .timeline-card {
+        .card {
             background: rgba(13, 27, 42, 0.9);
             border-radius: 8px;
             padding: 1.5rem;
             width: 300px;
             color: #ECECEC;
-            transition: transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
         }
-        .timeline-card:hover {
+        .card:hover {
             transform: scale(1.05);
         }
         footer {
@@ -119,21 +164,54 @@
         }
     </style>
     <script>
-        window.addEventListener("scroll", () => {
-            const header = document.querySelector("header");
-            header.classList.toggle("scrolled", window.scrollY > 50);
+        document.addEventListener("DOMContentLoaded", () => {
+            const progressBar = document.getElementById("progress-bar");
+            const loadingPercentage = document.getElementById("loading-percentage");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                progress = Math.min(progress, 100);
+
+                progressBar.style.width = `${progress}%`;
+                loadingPercentage.innerText = `${Math.floor(progress)}%`;
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    document.getElementById("loading-screen").style.display = "none";
+                }
+            }, 100);
+
+            window.addEventListener("scroll", () => {
+                const header = document.querySelector("header");
+                header.classList.toggle("scrolled", window.scrollY > 50);
+            });
         });
     </script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div id="loading-logo">
+            <img src="img/5390cc763267fcdf77044bb570805350-removebg-preview.png" alt="ISRO Logo" width="100"> <!-- Replace with the path to the ISRO logo -->
+        </div>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="loading-percentage">0%</div>
+    </div>
+
+    <!-- Main Content -->
     <header>
-        <div class="logo">ISRO</div>
+        <div class="logo">
+            <img src="img/5390cc763267fcdf77044bb570805350-removebg-preview.png" alt="ISRO Logo" height="40"> <!-- Replace with the path to the ISRO logo -->
+            ISRO
+        </div>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Missions</a>
-            <a href="#">News</a>
-            <a href="#">Research</a>
+            <a href="#about">About</a>
+            <a href="#missions">Missions</a>
+            <a href="#news">News</a>
+            <a href="#research">Research</a>
         </nav>
     </header>
 
@@ -143,26 +221,44 @@
         <a href="#about" class="btn">Discover More</a>
     </section>
 
+    <!-- About Section -->
     <section class="section" id="about">
         <h2>About ISRO</h2>
         <p>We are dedicated to advancing India’s space capabilities and exploring the unknown for a better future.</p>
+        <div class="section-content">
+            <div class="card"><h3>Our Vision</h3><p>To harness space technology for national development and address real-world challenges.</p></div>
+            <div class="card"><h3>Our Mission</h3><p>To promote space science and develop satellite launch capabilities for peaceful applications.</p></div>
+            <div class="card"><h3>Global Partnerships</h3><p>Collaborating with space agencies worldwide to push the frontiers of exploration.</p></div>
+        </div>
     </section>
 
-    <section class="section" id="timeline">
-        <h2>Mission Timeline</h2>
-        <div class="timeline">
-            <div class="timeline-card">
-                <h3>Chandrayaan-3</h3>
-                <p>India’s next lunar mission.</p>
-            </div>
-            <div class="timeline-card">
-                <h3>Mangalyaan</h3>
-                <p>India's Mars Orbiter Mission.</p>
-            </div>
-            <div class="timeline-card">
-                <h3>Gaganyaan</h3>
-                <p>Preparing for India’s first human spaceflight.</p>
-            </div>
+    <!-- Missions Section -->
+    <section class="section" id="missions">
+        <h2>Missions</h2>
+        <div class="section-content">
+            <div class="card"><h3>Chandrayaan-3</h3><p>India’s next lunar mission to explore the moon's surface.</p></div>
+            <div class="card"><h3>Mangalyaan</h3><p>India’s first Mars Orbiter Mission, providing critical data on Mars.</p></div>
+            <div class="card"><h3>Gaganyaan</h3><p>Preparing for India’s first human spaceflight mission.</p></div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section" id="news">
+        <h2>News</h2>
+        <div class="section-content">
+            <div class="card"><h3>ISRO to Launch GSLV Mk III</h3><p>The powerful GSLV Mk III set to launch a satellite into geostationary orbit.</p></div>
+            <div class="card"><h3>Successful PSLV Launch</h3><p>The PSLV-C51 launch places 18 satellites in orbit, achieving another milestone.</p></div>
+            <div class="card"><h3>ISRO and NASA Collaborate</h3><p>Joint missions on lunar and Mars exploration deepen space research collaboration.</p></div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section" id="research">
+        <h2>Research</h2>
+        <div class="section-content">
+            <div class="card"><h3>Spacecraft Development</h3><p>Innovative spacecraft design for sustainable and long-term space missions.</p></div>
+            <div class="card"><h3>Rocket Propulsion</h3><p>Researching advanced propulsion technologies for deep space exploration.</p></div>
+            <div class="card"><h3>Space Medicine</h3><p>Studies on the impact of space travel on human health and medicine in space.</p></div>
         </div>
     </section>
 
@@ -171,3 +267,4 @@
     </footer>
 </body>
 </html>
+
